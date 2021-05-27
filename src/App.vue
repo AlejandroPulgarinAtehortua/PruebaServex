@@ -2,25 +2,23 @@
   <div id="app">
     <!-- <header> </header> -->
     <!-- <body></body> -->
-    <h1 class=titulo> consultar datos</h1>
-    <button v-on:click="fetch"> consultar</button>
+    <h1 class=titulo>Rick & Morty</h1>
+    <h2>Información de los personajes</h2>
+    <button v-on:click="fetch"> click para concerlos</button>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-// import header from './components/header.vue';
-// import body from './components/body.vue'
 export default {
   name: 'App',
   dependecies: axios,
   methods:{
   fetch(){
-    console.log('holi')
+    // console.log('holi')
     console.log(result)
     var result = axios
       .get("https://rickandmortyapi.com/api/character")
-     
       .then((res) => {
       console.log(res.data)
     })
@@ -42,5 +40,18 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+#app button{
+  padding: 1rem;
+  border: none;
+  color:#2c3e50;
+  border-radius: 1rem;
+  transition: all ease 0.3s;
+  background-color: rgba(255, 255, 255, 0.496);
+}
+#app button:hover{
+  cursor: pointer;
+  transform: scale(1.1);
+  font-weight: bold;
 }
 </style>
