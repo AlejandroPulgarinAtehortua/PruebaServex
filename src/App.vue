@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
-    <h1 class=titulo> </h1>
+    <h1 class=titulo> <a target="_bkank" href="https://www.adultswim.com/streams/rick-and-morty"></a> </h1>
     <h2>Información de los personajes</h2>
     <!-- <button v-on:click="fetch"> click para concerlos</button> -->
 
@@ -45,8 +45,7 @@ export default {
       statusOptions: [
         { text: 'All', value: '' },
         { text: 'Alive', value: 'alive' },
-        { text: 'Dead', value: 'dead' },
-        // { text: 'Unknown', value: 'unknown' }
+        { text: 'Dead', value: 'dead' }
 		],
 		filtersApplied: [],
 		timer: null
@@ -125,6 +124,13 @@ export default {
 
 /* ------------------------- */
 .conteiner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h1 a{
+  width: 100vw;
+  height: 25vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -210,5 +216,36 @@ export default {
     border-radius: 50%;
     height: 1rem;;
 }
+/* ------------ Responsive */
+@media(max-width: 700px) {
+#app {
+    background-position: bottom;
+    background-attachment: fixed;
+    background-size: 80rem 53rem;
+    text-align: center;
+    }
 
+#app h1, #app h2, #app h3{
+  text-align: center;
+  color: rgba(255, 255, 255);
+  /* margin: 0; */
+}
+#app .card:hover{
+  cursor: default;
+  transform: scale(1);  
+}
+#app h1:hover{
+  cursor: pointer;
+  transform: scale(1);
+}
+.card{
+  flex-direction: column;
+  height: auto;
+  border-radius: 5.5rem;
+  height: auto;
+}
+.card-content{
+  height: 28vh;
+}
+}
 </style>
