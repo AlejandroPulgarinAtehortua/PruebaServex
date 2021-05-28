@@ -19,7 +19,7 @@ Algunas condiciones para los estados de los personajes son:
 
 
 ## Algunas especificaciones
-Este proyecto se contruyó utilizando:
+Este proyecto se construyó utilizando:
 - [GitHub](GitHubhttps://github.com)
 - Node Js para npm v14.17.0 [NodeJS](https://nodejs.org/es/)
 - @vue/cli 4.5.13 [VueJs](https://vuejs.org)
