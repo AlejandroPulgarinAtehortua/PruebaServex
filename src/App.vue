@@ -2,7 +2,7 @@
   <div id="app">
 
     <h1 class=titulo> <a target="_bkank" href="https://www.adultswim.com/streams/rick-and-morty"></a> </h1>
-    <h2>Información de los personajes</h2>
+    <h2>Capsulas con información de los personajes</h2>
     <!-- <button v-on:click="fetch"> click para concerlos</button> -->
 
     <div class="conteiner" v-for="character of characters" v-bind:key="character.id">
@@ -78,7 +78,7 @@ export default {
 }
 #app {
   background-image: url('https://fondosmil.com/fondo/27365.png');
-  background-position: center;
+  background-position: bottom;
   background-attachment: fixed;
   background-repeat: no-repeat;
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -139,7 +139,7 @@ h1 a{
 .card{
   display: flex;
 	height:300px;
-	border-radius:2.5rem;
+	border-radius:10.5rem;
 	overflow:hidden;
 	margin-bottom:4.5rem;
 	position:relative;
@@ -221,7 +221,7 @@ h1 a{
 #app {
     background-position: bottom;
     background-attachment: fixed;
-    background-size: 80rem 53rem;
+    background-size: 49rem 34rem;;
     text-align: center;
     }
 
@@ -241,11 +241,11 @@ h1 a{
 .card{
   flex-direction: column;
   height: auto;
-  border-radius: 5.5rem;
+  border-radius: 10.5rem;
   height: auto;
 }
 .card-content{
-  height: 28vh;
+  height: 36vh;
 }
 }
 </style>
