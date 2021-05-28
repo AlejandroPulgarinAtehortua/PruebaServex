@@ -57,6 +57,41 @@ Cada personaje tiene una tarjeta unica con una imagen, su nombre, status(Alived 
 </template>
 
 <script>
+   
+
+// new Vue({
+//     data() {
+//         return {
+//             a: 'a',
+//             b: 'b'
+//         }
+//     },
+//     created() {
+//         this.$log.debug('test', this.a, 123)
+//         this.$log.info('test', this.b)
+//         this.$log.warn('test')
+//         this.$log.error('test')
+//         this.$log.fatal('test')
+//         externalFunction()
+//     }
+// });
+
+// function externalFunction() {
+//     // log from external function
+//     Vue.$log.debug('log from function outside component.');
+// }
+
+
+
+
+
+
+
+
+
+
+
+
 // Se importa Axios, este es un cliente HTTP basado en promesas para posteriormente hacer la peticion GET que recibirá como parametro una url
 import axios from 'axios'
 // Se genera un objeto que exporta los datos para ser importados en index.html, ser renderizados e integrarlos en la vista del proyecto.
@@ -89,7 +124,10 @@ export default {
     .catch(error => {alert('Revisa el enlace de requerimiento a la API\n\nMensaje para el usuario:\nLAMENTAMOS LOS INCONVENIENTES :(\nEn este momento tenemos algunos problemas para obtener los datos\n\n\n' + error)
     this.errored = true}) 
   }
-  }
+  },
+      Save() {
+      this.$log.success('Transaction saved!');
+    }
 }
 </script>
 
