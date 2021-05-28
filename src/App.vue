@@ -25,6 +25,18 @@
         </div>
       </div>
     </div>
+      <section v-if="errored" class="alerta">
+        <p>---|Lo sentimos, no es posible obtener la información <br>en este momento, por favor intente nuevamente mas tarde|---</p>
+          <img class="img" src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2019/07/doofus-rick.png" >
+      </section>
+
+      <footer>
+        <a target="_bkank" href="https://es.wikipedia.org/wiki/Rick_y_Morty">Wiki</a>
+        <a target="_bkank" href="https://rickandmortyapi.com/about">API</a>
+        <a target="_bkank" href="https://www.adultswim.com/streams/rick-and-morty">Episodios</a>
+      </footer>
+      
+        
 
     <!-- <div v-for="character of characters" v-bind:key="character.id">
       {{character}}
@@ -41,6 +53,7 @@ export default {
     return{
       characters: [],
       nameFilter: '',
+      errored: false,
       selectedStatusFilter: '',
       statusOptions: [
         { text: 'All', value: '' },
@@ -62,8 +75,9 @@ export default {
     axios.get('https://rickandmortyapi.com/api/character/1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20')
     .then(function(res) {
         x.characters = res.data;
-        // console.log(res.data)
     })
+    .catch(error => {alert('Revisa el enlace de requerimiento a la API\n\nMensaje para el usuario:\nLAMENTAMOS LOS INCONVENIENTES :(\nEn este momento tenemos algunos problemas para obtener los datos\n\n\n' + error)
+    this.errored = true}) 
   }
   }
 }
@@ -134,6 +148,23 @@ h1 a{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.alerta{
+  font-size: 2rem;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  /* text-align: center; */
+  color:rgb(155, 155, 155);
+  font-weight: bold;
+  margin: 9rem 0 0 0;
+}
+.alerta img{
+  width: 50vw;
+  margin: 3rem auto;
+  border-radius: 4rem;
 }
 
 .card{
@@ -216,6 +247,26 @@ h1 a{
     border-radius: 50%;
     height: 1rem;;
 }
+footer{
+  height: 20vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+background: rgb(7,10,19);
+background: radial-gradient(circle, rgba(7,10,19,1) 10%, rgba(38,44,58,1) 67%);
+}
+footer a{
+  text-decoration: none;
+  font-size: 2rem;
+  color:rgba(255, 255, 255, 0.605);
+  transition: all ease 0.3s;
+}
+footer a:hover{
+  transform: scale(1.2);
+  color: #84CA3B;
+  text-decoration: overline;
+}
 /* ------------ Responsive */
 @media(max-width: 700px) {
 #app {
@@ -240,7 +291,6 @@ h1 a{
 }
 .card{
   flex-direction: column;
-  height: auto;
   border-radius: 10.5rem;
   height: auto;
 }
