@@ -5,7 +5,7 @@ El proyecto consume una API de los personajes de Rick & morty. Este API contiene
 
 Algunas condiciones para los estados de los personajes son:
 
-Cada personaje tiene una tarjeta unica con una imagen, su nombre, status(Alived o Dead) y la especia a la que pertenece el personaje.
+Cada personaje tiene una tarjeta unica con una imagen, su nombre, status(Alived o Dead) y la especie a la que pertenece el personaje.
   - Si el status del personaje es "Dead", la imagen debe estar en escala de grises.
   - Si el status del peronaje es "Unknown" no se debe mostrar el personaje.
   - Si el status es "Alived" se muesta además un marcador verde en el costado derecho del estado del personje.
@@ -42,7 +42,7 @@ Cada personaje tiene una tarjeta unica con una imagen, su nombre, status(Alived 
         </div>
       </div>
     </div>
-    <!-- v-if="errored" activa renderiza en el html los errrores en la recepción de la información de la API, se muestra una alerta de Js y se carga la información de error -->
+    <!-- v-if="errored" activa renderiza en el html los errores en la recepción de la información de la API, se muestra una alerta de Js y se carga la información de error -->
       <section v-if="errored" class="alerta">
         <p>---|Lo sentimos, no es posible obtener la información <br>en este momento, por favor intente nuevamente mas tarde|---</p>
           <img class="img" src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2019/07/doofus-rick.png" >
