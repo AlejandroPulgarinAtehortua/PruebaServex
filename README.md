@@ -13,27 +13,27 @@ Cada personaje tiene una tarjeta unica con una imagen, su nombre, status(Alived 
 - El personaje pierde la escala de grises cuando se realiza un hover para darle mas información visual de este mismo al usuario.
 - En el header hay un enlace para ir a la pagina oficial de la serie distribuida por adultswim rick & Motty
 - Algunas especificaciones
--
+
 Este proyecto se construyó utilizando:
 
 [GitHub]()
-Node Js para npm v14.17.0 [NodeJS](https://nodejs.org/es/)
-@vue/cli 4.5.13 [VueJs](https://vuejs.org/)
-El archivo index.html integra los componentes desarrollados al interior del framework, para este caso será App.vue por tanto este será en archivo que se documentará ya que esté contiende los scripts y los componentes que conforman la solucion.
+- Node Js para npm v14.17.0 [NodeJS](https://nodejs.org/es/)
+- @vue/cli 4.5.13 [VueJs](https://vuejs.org/)
+- El archivo index.html integra los componentes desarrollados al interior del framework, para este caso será App.vue por tanto este será en archivo que se documentará ya que esté contiende los scripts y los componentes que conforman la solucion.
 
-Project setup
+### Project setup
 ```
 npm install
 ```
-Compiles and hot-reloads for development
+### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
-Compiles and minifies for production
+### Compiles and minifies for production
 ```
 npm run build
 ```
-Lints and fixes files
+### Lints and fixes files
 ```
 npm run lint
 ```
