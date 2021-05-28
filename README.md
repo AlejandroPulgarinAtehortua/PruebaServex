@@ -16,7 +16,7 @@ Cada personaje tiene una tarjeta unica con una imagen, su nombre, status(Alived 
 
 Este proyecto se construyó utilizando:
 
-- [GitHub](GitHubhttps://github.com)
+- GitHub [GitHub](GitHubhttps://github.com)
 - Node Js para npm v14.17.0 [NodeJS](https://nodejs.org/es/)
 - @vue/cli 4.5.13 [VueJs](https://vuejs.org/)
 - El archivo index.html integra los componentes desarrollados al interior del framework, para este caso será App.vue por tanto este será en archivo que se documentará ya que esté contiende los scripts y los componentes que conforman la solucion.
