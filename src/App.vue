@@ -16,16 +16,21 @@ Cada personaje tiene una tarjeta unica con una imagen, su nombre, status(Alived 
 
     <h1 class=titulo> <a target="_bkank" href="https://www.adultswim.com/streams/rick-and-morty"></a> </h1>
     <h2>Capsulas con información de los personajes</h2>
-
+    <!-- Contenedor de los elementos que muestran la información consultada por la api recorriendo el arreglo con v-for y usando la llave id del caracter.
+    El div card activa una clase al cumplir una condición, en este caso realiza un display none desde los estilos para ignorar el estado de los personajes = 'unknown'-->
     <div class="conteiner" v-for="character of characters" v-bind:key="character.id">
       <div class="card" :class="character.status === 'unknown' ? 'desconocido' : ''">
         <div class="card-header">
+          <!-- Las imagenes se cargan por defecto y se asignan al src para mostarrlas, así mismo a las que cumplan con la condicion 'Dead' en el status del personaje se les asigna una clase
+          que aplica un filtro grayscale(100%) a las imagenes de los personajes que cumplan con la condición -->
           <img class="img" v-bind:src="character.image" v-bind:alt="character.name" :class="character.status === 'Dead' ? 'gray-img' : ''">
         </div>
         <div class="card-content">
           <h3 class="title nombre">
             {{character.name}}
           </h3>
+          <!-- Se presenta el estado del personahe, cuando el status es = 'Alive' carga una clase que genera un marcador verde al lado derecho del dato cargado desde la api, en caso de que
+          el status del personaje sea 'Dead' el marcador es de color rojo -->
           <h3 class="title">Estado:
             {{character.status}} <span :class="character.status === 'Alive' ? 'span' : ''"></span>
             <span :class="character.status === 'Dead' ? 'dead' : ''"></span>
@@ -37,6 +42,7 @@ Cada personaje tiene una tarjeta unica con una imagen, su nombre, status(Alived 
         </div>
       </div>
     </div>
+    <!-- v-if="errored" activa renderiza en el html los errrores en la recepción de la información de la API, se muestra una alerta de Js y se carga la información de error -->
       <section v-if="errored" class="alerta">
         <p>---|Lo sentimos, no es posible obtener la información <br>en este momento, por favor intente nuevamente mas tarde|---</p>
           <img class="img" src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2019/07/doofus-rick.png" >
@@ -51,50 +57,48 @@ Cada personaje tiene una tarjeta unica con una imagen, su nombre, status(Alived 
 </template>
 
 <script>
+// Se importa Axios, este es un cliente HTTP basado en promesas para posteriormente hacer la peticion GET que recibirá como parametro una url
 import axios from 'axios'
+// Se genera un objeto que exporta los datos para ser importados en index.html, ser renderizados e integrarlos en la vista del proyecto.
 export default {
-   name: 'App',
+  name: 'App',
+  // la funcion anonima retorna los valores cargados de la respuesta de la API solicitada por axios.get
   data: function (){
     return{
       characters: [],
-      nameFilter: '',
       errored: false,
-      selectedStatusFilter: '',
-      statusOptions: [
-        { text: 'All', value: '' },
-        { text: 'Alive', value: 'alive' },
-        { text: 'Dead', value: 'dead' }
-		],
-		filtersApplied: [],
-		timer: null
     };
   },
+  // llama el metodo fetch que contiene la petición a la API
   created(){
     this.fetch()
   },
-  dependecies: axios,
   methods:{
+    // Se delara un metodo fetch() que realiza la petición a la API cuando es llamado desde created
   fetch(){
-    // console.log('holi')
     let x = this;
+    // Realiza la peticion a la API. axios.get recibe una url como parametro, en este caso hace la solicitd a la API por el metodo get y se seleccionan los 20 primeros personajes
+    // con el numero de personajes separados por comas como aparece en la documentación de la API https://rickandmortyapi.com/documentation/#get-multiple-characters
     axios.get('https://rickandmortyapi.com/api/character/1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20')
+    // .then asigna la respuesta de la API (almacenada en res.data) a characters que se asigna data.characters[]
     .then(function(res) {
         x.characters = res.data;
     })
+    // .catch realiza el manejo de erores presentando una alerta por pantallay cambiando el estado de errored a true lo que permite cargar en el componente que se despliega en 
+    // index.html mostrando además de la alerta un mensaje y una imagen. Esto se despliega si existe un error en consumir los datos desde la API
     .catch(error => {alert('Revisa el enlace de requerimiento a la API\n\nMensaje para el usuario:\nLAMENTAMOS LOS INCONVENIENTES :(\nEn este momento tenemos algunos problemas para obtener los datos\n\n\n' + error)
     this.errored = true}) 
   }
   }
 }
-
- 
 </script>
 
 <style>
 
 ::-webkit-scrollbar {
-    display: none;
+    display: none; /*Elimina el scrollbar*/
 }
+/* Header------------------------------------------------------------------------------------------- */
 #app {
   background-image: url('https://fondosmil.com/fondo/27365.png');
   background-position: bottom;
@@ -128,6 +132,13 @@ export default {
   width: 100vw;
   height: 30vh;
 }
+h1 a{
+  width: 100vw;
+  height: 25vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 #app h1:hover{
   cursor: pointer;
   transform: scale(1.1);
@@ -137,41 +148,12 @@ export default {
   margin: 0 0 5rem 0;
 }
 
-
-
-
-
-/* ------------------------- */
 .conteiner{
   display: flex;
   justify-content: center;
   align-items: center;
 }
-h1 a{
-  width: 100vw;
-  height: 25vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.alerta{
-  font-size: 2rem;
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  /* text-align: center; */
-  color:rgb(155, 155, 155);
-  font-weight: bold;
-  margin: 9rem 0 0 0;
-}
-.alerta img{
-  width: 50vw;
-  margin: 3rem auto;
-  border-radius: 4rem;
-}
-
+/* contenedor de los elementos del body que da estilos a la información consumida desde la API */
 .card{
   display: flex;
 	height:300px;
@@ -188,20 +170,11 @@ h1 a{
   transform: scale(1.2);
   -webkit-box-shadow: -5px 12px 15px 1px rgba(0, 0, 0, 0.653); 
   box-shadow: -5px 12px 15px 1px rgba(0, 0, 0, 0.633);
-  border-radius: 4.5rem;
-  
+  border-radius: 4.5rem;  
 }
-/* #app .card:hover .card-header img{
-  width: 30vw;
-  position: absolute;
-} */
 #app .card:hover h3{
   color: white;
 }
-
-/* .card:hover .card-content{
-  font-size: 1.2rem;
-} */
 .card-content{
   max-width: 20rem;
 }
@@ -220,38 +193,7 @@ h1 a{
   font-size: 3rem;
   margin: 0 0 3rem 0;
 }
-
-/* -------------------------- */
-.desconocido{
-  display:none
-}
-#app .card:hover .card-header img{
-  filter: drop-shadow(16px 16px 10px black) ;
-}
-.img{
-  filter: drop-shadow(16px 16px 10px black);
-}
-.gray-img{
-  filter: grayscale(100%) drop-shadow(16px 16px 10px black);
-}
- .span{
-    display: inline-block;
-    width: 1rem;
-    margin-right:0 0.375rem;
-    background: rgb(85, 204, 68);
-    /* background:red ; */
-    border-radius: 50%;
-    height: 1rem;
-}
-.dead{
-    display: inline-block;
-    width: 1rem;
-    margin-right:0 0.375rem;
-    /* background: rgb(85, 204, 68); */
-    background:red ;
-    border-radius: 50%;
-    height: 1rem;;
-}
+/* Estilos del footer------------------------------------------------------------------ */
 footer{
   height: 20vh;
   width: 100vw;
@@ -272,7 +214,58 @@ footer a:hover{
   color: #84CA3B;
   text-decoration: overline;
 }
-/* ------------ Responsive */
+
+/* Clases de los estilos de los elementos condicionados (Dead, control de errores(errored), personajes unknown,escala de grises para personajes Dead y los marcadores
+con color verde y rojo para los personajes vivos y muertos respectivamente*/
+.alerta{
+  font-size: 2rem;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  /* text-align: center; */
+  color:rgb(155, 155, 155);
+  font-weight: bold;
+  margin: 9rem 0 0 0;
+}
+.alerta img{
+  width: 50vw;
+  margin: 3rem auto;
+  border-radius: 4rem;
+}
+.desconocido{
+  display:none
+}
+#app .card:hover .card-header img{
+  filter: drop-shadow(16px 16px 10px black) ;
+}
+.img{
+  filter: drop-shadow(16px 16px 10px black);
+}
+.gray-img{
+  filter: grayscale(100%) drop-shadow(16px 16px 10px black);
+}
+ .span{
+    display: inline-block;
+    width: 1rem;
+    /* margin-right:0 0.375rem; */
+    background: rgb(85, 204, 68);
+    /* background:red ; */
+    border-radius: 50%;
+    height: 1rem;
+}
+.dead{
+    display: inline-block;
+    width: 1rem;
+    /* margin-right:0 0.375rem; */
+    /* background: rgb(85, 204, 68); */
+    background:red ;
+    border-radius: 50%;
+    height: 1rem;;
+}
+
+/* ------------ Responsive ------------------ se realiza solo la version mobile ya que para tablet (y por la forma en la que se le dan estilos en web) pueden usarse las 
+mismas clases utilizadas en 1023px(web)*/
 @media(max-width: 700px) {
 #app {
     background-position: bottom;
@@ -286,10 +279,6 @@ footer a:hover{
   color: rgba(255, 255, 255);
   /* margin: 0; */
 }
-#app .card:hover{
-  cursor: default;
-  transform: scale(1);  
-}
 #app h1:hover{
   cursor: pointer;
   transform: scale(1);
@@ -298,6 +287,10 @@ footer a:hover{
   flex-direction: column;
   border-radius: 10.5rem;
   height: auto;
+}
+#app .card:hover{
+  cursor: default;
+  transform: scale(1);  
 }
 .card-content{
   height: 36vh;
